@@ -6,4 +6,28 @@ This code library is for educational purposes only and obviously not to be used 
 
 ## Status
 
-🚧 Work in progress.
+### Interpolation
+
+- [x] Horner's Algorithm
+
+- [x] Newton Interpolation
+
+- [x] Lagrange Interpolation
+
+- [ ] Barycentric Lagrange Interpolation
+
+- [ ] Thomas Algorithm
+
+- [ ] Spline Interpolation
+
+### Approximation
+
+- [ ] Remez Algorithm
+
+### Linear Algebra
+
+- [x] LU Decomposition
+
+- [x] Solving Linear Systems
+
+- [ ] Cholesky Decomposition
