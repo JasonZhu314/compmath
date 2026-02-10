@@ -1,6 +1,10 @@
 # CompMath - Python implementations of computational mathematics algorithms
 
+<<<<<<< HEAD
 These are my implementations of important computational mathematics algorithms when self-studying numerical analysis and numerical linear algebra. Uses Numpy and PyTorch for the algorithms, MatPlotLib for plotting and SciPy for testing results and benchmarking.
+=======
+CompMath is a collection of my implementations of important computational mathematics algorithms when self-studying numerical analysis and numerical linear algebra. It uses Numpy for the algorithms, MatPlotLib for plotting and SciPy for testing results and benchmarking.
+>>>>>>> e5f0f9d56d72c51940ecfdc4162ffb032f277c5c
 
 This code library is for educational purposes only and obviously not to be used anywhere else, since it contains from-scratch pure NumPy implementations and is not optimized for speed.
 

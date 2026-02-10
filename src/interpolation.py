@@ -107,7 +107,70 @@ def lagrange(xs : np.array, ys : np.array, x : np.array):
         result += temp
     return result
 
+# Piecewise Linear Interpolation
+
+def piecewise_linear(xs : np.array, ys : np.array, x : np.array):
+    '''
+    Implements piecewise linear interpolation, evaluates the spline at each point in x.
+    
+    Parameters
+    ----------
+    xs : np.array
+        x-coordinates of the interpolation points
+    ys : np.array
+        y-coordinates of the interpolation points
+    x : np.array
+        x-coordinates where the spline is evaluated
+        
+    Returns
+    ----------
+    np.array
+        Values of the piecewise linear function at each point in x
+    '''
+    result = np.zeros_like(x)
+    for i in range(len(x)):
+        if x[i] < xs[0]:
+            result[i] = ys[0]
+        elif x[i] >= xs[-1]:
+            result[i] = ys[-1]
+        else:
+            idx = np.searchsorted(xs, x[i], side='right')
+            result[i] = (x[i] - xs[idx - 1]) / (xs[idx] - xs[idx - 1]) * ys[idx] + (xs[idx] - x[i]) / (xs[idx] - xs[idx - 1]) * ys[idx - 1]
+    return result   
+
 # Spline Interpolation
+
+def spline_second_derivative(xs : np.array, ys : np.array):
+    '''
+    Implements cubic spline interpolation, calculates the second derivative at each interpolation point.
+    
+    Parameters
+    ----------
+    xs : np.array
+        x-coordinates of the interpolation points
+    ys : np.array
+        y-coordinates of the interpolation points
+        
+    Returns
+    ----------
+    np.array
+        Values of second derivative at each interpolation point
+    '''
+    n = len(xs)
+    h = xs[1:] - xs[:-1]
+    b = 6 * (ys[1:] - ys[:-1]) / h
+    u = (h[:-1] + h[1:]) * 2
+    v = (b[1:] - b[:-1])
+    z = np.zeros_like(xs)
+    
+    for i in range(n - 3):
+        u[i + 1] -= (h[i + 1] ** 2) / u[i]
+        v[i + 1] -= (h[i + 1] * v[i]) / u[i]
+        
+    for i in range(n - 2, 0, -1):
+        z[i] = (v[i - 1] - h[i] * z[i + 1]) / u[i - 1]
+    
+    return z
 
 def spline(xs : np.array, ys : np.array, x : np.array):
     '''
@@ -127,4 +190,26 @@ def spline(xs : np.array, ys : np.array, x : np.array):
     np.array
         Values of the cubic spline at each point in x
     '''
-    pass
+    n = len(xs)
+    h = xs[1:] - xs[:-1]
+    b = 6 * (ys[1:] - ys[:-1]) / h
+    u = (h[:-1] + h[1:]) * 2
+    v = (b[1:] - b[:-1])
+    z = np.zeros_like(xs)
+    for i in range(n - 3):
+        u[i + 1] -= (h[i + 1] ** 2) / u[i]
+        v[i + 1] -= (h[i + 1] * v[i]) / u[i]
+    for i in range(n - 2, 0, -1):
+        z[i] = (v[i - 1] - h[i] * z[i + 1]) / u[i - 1]
+        
+    result = np.zeros_like(x)
+    for i in range(len(x)):
+        if x[i] < xs[0]:
+            result[i] = ys[0]
+        elif x[i] >= xs[-1]:
+            result[i] = ys[-1]
+        else:
+            idx = np.searchsorted(xs, x[i], side='right') - 1
+            result[i] = z[idx] * ((xs[idx + 1] - x[i]) ** 3) / (6 * h[idx]) + z[idx + 1] * ((x[i] - xs[idx]) ** 3) / (6 * h[idx]) + (ys[idx + 1] / h[idx] - (z[idx + 1] * h[idx]) / 6) * (x[i] - xs[idx]) + (ys[idx] / h[idx] - (z[idx] * h[idx]) / 6) * (xs[idx + 1] - x[i])
+    return result
+
