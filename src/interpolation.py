@@ -212,4 +212,3 @@ def spline(xs : np.array, ys : np.array, x : np.array):
             idx = np.searchsorted(xs, x[i], side='right') - 1
             result[i] = z[idx] * ((xs[idx + 1] - x[i]) ** 3) / (6 * h[idx]) + z[idx + 1] * ((x[i] - xs[idx]) ** 3) / (6 * h[idx]) + (ys[idx + 1] / h[idx] - (z[idx + 1] * h[idx]) / 6) * (x[i] - xs[idx]) + (ys[idx] / h[idx] - (z[idx] * h[idx]) / 6) * (xs[idx + 1] - x[i])
     return result
-

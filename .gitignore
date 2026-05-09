@@ -1,0 +1,47 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Local/private context
+LOCAL_CONTEXT.md
+.local/
+
+# Generated tool metadata
+/refine-logs/*.meta.json
+
+# Experiment artifacts
+/runs/
+/data/
+/checkpoints/
+/outputs/
+/wandb/
+/reports/**
+!/reports/**/
+!/reports/**/*.md
+!/reports/**/.gitkeep
+
+# Large files
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.npz
+*.npy
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

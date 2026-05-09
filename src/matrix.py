@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 # LU Decomposition
 
@@ -30,9 +29,45 @@ def LU(A : np.array):
 
 # Cholesky Decomposition
 
+def cholesky(A : np.array):
+    '''
+    Implements Cholesky decomposition.
+    Decomposes symmetric matrix A into a product of a lower triangular matrix L and its transpose, such that A = LL^T.
+    
+    Parameters
+    ----------
+    A : np.array
+        Symmetric matrix to be decomposed
+        
+    Returns
+    ----------
+    np.array
+        Decomposed matrix L such that A = LL^T
+    '''
+    pass
+
+# Improved Cholesky Decomposition
+
+def cholesky_improved(A : np.array):
+    '''
+    Implements Cholesky decomposition.
+    Decomposes symmetric matrix A into a product of the form A = LDL^T, where L is a unit lower triangular matrix and D is a diagonal matrix.
+    
+    Parameters
+    ----------
+    A : np.array
+        Symmetric matrix to be decomposed
+        
+    Returns
+    ----------
+    [L, D] : list
+        Decomposed matrix L and D such that A = LDL^T
+    '''
+    pass
+
 # Solving Linear Systems
 
-def Lxb(L, b):
+def Lxb(L : np.array, b : np.array):
     '''
     Solves the linear system Lx = b, where L is a unit lower triangular matrix.
     
@@ -49,14 +84,14 @@ def Lxb(L, b):
         Solution matrix x such that Lx = b
     '''
     n = b.shape[0]
-    x = np.zeros(b.shape)
+    x = np.zeros_like(b)
     bt = np.copy(b)
     for i in range(n):
         x[i] = bt[i]
         bt[i + 1 : ] -= x[i].reshape(1, -1) * L[i + 1 : , i].reshape(-1, 1)
     return x
 
-def Uxb(U, b):
+def Uxb(U : np.array, b : np.array):
     '''
     Solves the linear system Ux = b, where U is an upper triangular matrix.
     
@@ -73,14 +108,14 @@ def Uxb(U, b):
         Solution matrix X such that UX = B
     '''
     n = b.shape[0]
-    x = np.zeros(b.shape)
+    x = np.zeros_like(b)
     bt = np.copy(b)
     for i in range(n - 1, -1, -1):
         x[i] = bt[i] / U[i, i]
         bt[: i] -= x[i].reshape(1, -1) * U[: i, i].reshape(-1, 1)
     return x
 
-def Axb(A, b):
+def Axb(A : np.array, b : np.array):
     '''
     Solves the linear system Ax = b using LU decomposition.
     Decomposes matrix A into L and U, then solves the systems Ly = b and Ux = y.
