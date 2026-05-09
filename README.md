@@ -1,10 +1,6 @@
 # CompMath - Python implementations of computational mathematics algorithms
 
-<<<<<<< HEAD
-These are my implementations of important computational mathematics algorithms when self-studying numerical analysis and numerical linear algebra. Uses Numpy and PyTorch for the algorithms, MatPlotLib for plotting and SciPy for testing results and benchmarking.
-=======
-CompMath is a collection of my implementations of important computational mathematics algorithms when self-studying numerical analysis and numerical linear algebra. It uses Numpy for the algorithms, MatPlotLib for plotting and SciPy for testing results and benchmarking.
->>>>>>> e5f0f9d56d72c51940ecfdc4162ffb032f277c5c
+CompMath is a collection of my implementations of important computational mathematics algorithms when studying numerical analysis and numerical linear algebra. It uses Numpy for the algorithms, MatPlotLib for plotting and SciPy for testing results and benchmarking.
 
 This code library is for educational purposes only and obviously not to be used anywhere else, since it contains from-scratch pure NumPy implementations and is not optimized for speed.
 
@@ -52,13 +48,15 @@ This code library is for educational purposes only and obviously not to be used 
 
 ### Numerical Integration
 
-- [ ] Midpoint Rule
+- [x] Midpoint Rule
 
-- [ ] Trapezoidal Rule
+- [x] Trapezoidal Rule
 
-- [ ] Simpson's Rule
+- [x] Simpson's Rule
 
-- [ ] Romberg Integration
+- [x] Romberg Integration
+
+- [x] Adaptive Quadrature
 
 - [ ] Gaussian Quadrature
 
@@ -95,8 +93,6 @@ This code library is for educational purposes only and obviously not to be used 
 - [ ] Euler's Method
 
 - [ ] Runge-Kutta Methods
-    - [ ] Heun's Method
-    - [ ] Gill's Method
 
 - [ ] Multi-Step Methods
 
@@ -105,6 +101,46 @@ This code library is for educational purposes only and obviously not to be used 
 - [ ] Symplectic Schemes
 
 ### PDEs
+
+#### Finite Difference Methods
+
+- [ ] Forward Difference Method
+- [ ] Backward Difference Method
+- [ ] Central Difference Method
+- [ ] Crank-Nicolson Method
+- [ ] Lax-Friedrichs Method
+- [ ] Lax-Wendroff Method
+- [ ] MacCormack Method
+- [ ] Leapfrog Method
+- [ ] Upwind Method
+- [ ] WENO Method
+
+#### Finite Element Methods
+
+- [ ] Galerkin Method
+- [ ] Petrov-Galerkin Method
+- [ ] Discontinuous Galerkin Method
+- [ ] Mixed Finite Element Method
+- [ ] Spectral Element Method
+- [ ] Isogeometric Analysis
+
+#### Finite Volume Methods
+
+- [ ] Godunov's Method
+- [ ] MUSCL Scheme
+- [ ] Roe's Approximate Riemann Solver
+- [ ] HLLC Riemann Solver
+- [ ] TVD Schemes
+- [ ] ENO Schemes
+- [ ] WENO Schemes
+
+#### Spectral Methods
+
+- [ ] Fourier Spectral Method
+- [ ] Chebyshev Spectral Method
+- [ ] Legendre Spectral Method
+- [ ] Hermite Spectral Method
+- [ ] Laguerre Spectral Method
 
 ### Stochastic Methods
 
@@ -119,6 +155,11 @@ This code library is for educational purposes only and obviously not to be used 
     - [ ] Metropolis-Hastings Algorithm
 
 - [ ] Monte Carlo Method
+
+- [ ] Variance Reduction Techniques
+    - [ ] Antithetic Variates
+    - [ ] Control Variates
+    - [ ] Importance Sampling
 
 - [ ] MCMC
 
@@ -138,15 +179,26 @@ This code library is for educational purposes only and obviously not to be used 
 
 - [ ] Improved Cholesky Decomposition
 
+- [x] Gaussian Elimination
+
+- [x] Banded Gaussian Elimination
+
+- [ ] Pivoting Strategies
+    - [x] Column Pivoting 
+    - [ ] Row Pivoting
+    - [ ] Complete Pivoting
+
 #### Iterative Methods
 
 - [ ] Jacobi Method
 
-- [ ] Gauss-Seidel Method
+- [x] Gauss-Seidel Method
 
 - [ ] Successive Over-Relaxation (SOR) Method
 
 - [ ] Conjugate Gradient Method
+
+- [ ] V-Cycle Multigrid Method
 
 #### Error Analysis
 
