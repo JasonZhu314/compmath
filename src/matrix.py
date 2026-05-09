@@ -27,6 +27,67 @@ def LU(A : np.array):
 
 # Gaussian Elimination
 
+def band_gaussian_elimination(A : np.array, b : np.array, k : int):
+    '''
+    Solves the linear system Ax = b using Gaussian elimination for band matrices.
+    A is a band matrix with bandwidth k, meaning that A[i, j] = 0 for |i - j| > k.
+    
+    Parameters
+    ----------
+    A : np.array
+        Band matrix to be solved
+    b : np.array
+        Right-hand side matrix
+    k : int
+        Bandwidth of the matrix A
+    
+    Returns
+    ----------
+    np.array
+        Solution matrix x such that Ax = b
+    '''
+    n = A.shape[0]
+    At = np.copy(A)
+    res = np.copy(b)
+    for i in range(n - 1):
+        res[i + 1 : min(n, i + 1 + k)] -= res[i] / At[i, i] * At[i + 1 : min(n, i + 1 + k), [i]]
+        At[i + 1 : min(n, i + 1 + k), i + 1 : min(n, i + 1 + k)] -= (At[i + 1 : min(n, i + 1 + k), [i]] / At[i, i]) * At[[i], i + 1 : min(n, i + 1 + k)]
+    res[n - 1] /= At[n - 1, n - 1]
+    for i in range(n - 2, -1, -1):
+        res[i] -= np.dot(At[i, i + 1 : min(n, i + 1 + k)], res[i + 1 : min(n, i + 1 + k)])
+        res[i] /= At[i, i]
+    return res
+
+def column_pivoting_gaussian_elimination(A : np.array, b : np.array):
+    '''
+    Solves the linear system Ax = b using Gaussian elimination with column pivoting.
+    Parameters
+    ----------
+    A : np.array
+        Matrix to be solved
+    b : np.array
+        Right-hand side matrix
+    
+    Returns
+    ----------
+    np.array
+        Solution matrix x such that Ax = b
+    '''
+    n = A.shape[0]
+    At = np.copy(A)
+    res = np.copy(b)
+    for i in range(n - 1):
+        idx = i + np.argmax(abs(At[i :, i]))
+        if idx != i:
+            res[[i, idx]] = res[[idx, i]]
+            At[[i, idx]] = At[[idx, i]]
+        At[i + 1 :, i + 1 :] -= (At[i + 1 :, [i]] / At[i, i]) * (At[[i], i + 1 :])
+        res[i + 1 :] -= res[i] / At[i, i] * At[i + 1 :, [i]]
+    for i in range(n - 1, -1, -1):
+        res[i] -= At[i, i + 1 :] @ res[i + 1 :]
+        res[i] /= At[i, i]
+    return res
+
 # Cholesky Decomposition
 
 def cholesky(A : np.array):
