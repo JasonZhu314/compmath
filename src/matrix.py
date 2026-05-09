@@ -197,3 +197,17 @@ def Axb(A : np.array, b : np.array):
     y = Lxb(ALU, b)
     x = Uxb(ALU, y)
     return x
+
+# Gauss-Seidel Iteration
+
+def GS_Step(A : np.array, x : np.array, b : np.array):
+    '''
+    One step of Gauss-Seidel iteration
+    A : Coefficient matrix
+    x : Current solution
+    b : Right-hand side vector
+    The function updates x in-place.
+    '''
+    n = len(x)
+    for i in range(n):
+        x[i] += (b[i] - np.dot(A[i], x)) / A[i][i]
