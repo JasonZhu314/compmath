@@ -105,7 +105,15 @@ def cholesky(A : np.array):
     np.array
         Decomposed matrix L such that A = LL^T
     '''
-    pass
+    n = A.shape[0]
+    result = np.zeros_like(A)
+    At = np.copy(A)
+    for i in range(n):
+        result[i, i] = np.sqrt(At[i, i])
+        result[i + 1:, i] = At[i + 1:, i] / result[i][i]
+        for j in range(i + 1, n):
+            At[j:, j] -= result[j, i] * result[j:, i]
+    return result
 
 # Improved Cholesky Decomposition
 
@@ -124,7 +132,16 @@ def cholesky_improved(A : np.array):
     [L, D] : list
         Decomposed matrix L and D such that A = LDL^T
     '''
-    pass
+    n = A.shape[0]
+    L = np.eye(n)
+    D = np.zeros(n)
+    At = np.copy(A)
+    for i in range(n):
+        D[i] = At[i, i]
+        L[i + 1:, i] = At[i + 1, i] / D[i]
+        for j in range(i + 1):
+            At[j:, j] -= At[j, i] * L[j:, i]
+    return [L, D]
 
 # Solving Linear Systems
 
