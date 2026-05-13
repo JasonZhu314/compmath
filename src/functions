@@ -1,0 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def gaussian(x : np.ndarray, sigma : float):
+    return np.exp(-x**2 / (2 * sigma**2))
+
+def runge(x : np.ndarray):
+    return 1 / (1 + 25 * x**2)
